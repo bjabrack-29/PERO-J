@@ -227,6 +227,65 @@ button:hover { opacity: 0.85; }
 .challenge-countdown strong { font-size: 28px; font-variant-numeric: tabular-nums; color: var(--yellow); }
 .modal-actions { display: flex; justify-content: flex-end; gap: 8px; }
 
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  flex: none;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+.spinner-small {
+  width: 10px;
+  height: 10px;
+  margin-right: 4px;
+  vertical-align: -1px;
+  border-width: 1px;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.odds-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.odds-label { flex: 1; color: var(--muted); font-size: 12px; }
+.odds-value { font-size: 18px; font-weight: 700; }
+.odds-pending { border-color: var(--accent); }
+.odds-confirmed { border-color: var(--green); }
+.odds-failed { border-color: var(--red); }
+
+.bet-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.bet-history { display: flex; flex-direction: column; gap: 12px; }
+.bet-history-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(120px, 1fr) minmax(120px, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.bet-history-row:last-child { padding-bottom: 0; border-bottom: none; }
+.bet-history-hash {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  font-size: 12px;
+}
+
 /* Mobile responsive styles */
 @media (max-width: 600px) {
   body { font-size: 13px; }
@@ -245,6 +304,9 @@ button:hover { opacity: 0.85; }
   .card {
     padding: 12px;
   }
+
+  .bet-grid { grid-template-columns: 1fr; }
+  .bet-history-row { grid-template-columns: 1fr; }
 }
 
 /* EventTable: allow horizontal scrolling on small screens instead of overflowing */

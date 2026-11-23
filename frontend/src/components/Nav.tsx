@@ -78,6 +78,9 @@ export default function Nav() {
           <NavLink to="/markets" onClick={() => setMenuOpen(false)} style={({ isActive }) => linkStyle(isActive)}>
             Markets
           </NavLink>
+          <NavLink to="/bets" onClick={() => setMenuOpen(false)} style={({ isActive }) => linkStyle(isActive)}>
+            Bets
+          </NavLink>
           <NavLink to="/profile" onClick={() => setMenuOpen(false)} style={({ isActive }) => linkStyle(isActive)}>
             Profile
           </NavLink>

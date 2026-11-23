@@ -11,6 +11,7 @@ import EventPage from "./pages/EventPage";
 import ProfilePage from "./pages/ProfilePage";
 import MarketsPage from "./pages/MarketsPage";
 import MarketPage from "./pages/MarketPage";
+import BetsPage from "./pages/BetsPage";
 import DisputesPage from "./pages/DisputesPage";
 import DisputeDetailPage from "./pages/DisputeDetailPage";
 import NotFound from "./pages/NotFound";
@@ -34,6 +35,7 @@ export default function App() {
               <Route path="/profile/:address" element={<ProfilePage />} />
               <Route path="/markets" element={<MarketsPage />} />
               <Route path="/market/:id" element={<MarketPage />} />
+              <Route path="/bets" element={<BetsPage />} />
               <Route path="/disputes" element={<DisputesPage />} />
               <Route path="/disputes/:marketId" element={<DisputeDetailPage />} />
               <Route path="*" element={<NotFound />} />

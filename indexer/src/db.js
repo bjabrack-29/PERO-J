@@ -313,6 +313,21 @@ export const db = {
   },
 
   /**
+   * Fetch the most recent event indexed for a Stellar transaction hash.
+   * Uses pool.query — safe to call outside of init().
+   *
+   * @param {string} txHash
+   * @returns {Promise<DecodedEvent|null>} The event row, or null if not found.
+   */
+  async getEventByTxHash(txHash) {
+    const { rows } = await pool.query(
+      "SELECT * FROM events WHERE tx_hash = $1 ORDER BY ledger DESC LIMIT 1",
+      [txHash]
+    );
+    return rows[0] ?? null;
+  },
+
+  /**
    * Return paginated events where the given address appears in the description
    * or raw_topics (case-insensitive substring match).
    * Uses pool.query — safe to call outside of init().

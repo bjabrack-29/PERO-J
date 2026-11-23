@@ -260,6 +260,17 @@ export function createApp() {
     });
   });
 
+  // GET /api/events/by-tx/:hash — latest indexed event for a transaction hash.
+  // Must be registered BEFORE /api/events/:seq so Express doesn't consume "by-tx"
+  // as the :seq parameter.
+  app.get(
+    "/api/events/by-tx/:hash",
+    asyncHandler(async (req, res) => {
+      const event = await db.getEventByTxHash(req.params.hash);
+      res.json(event);
+    })
+  );
+
   // GET /api/events/:seq/raw — raw un-decoded topics and data for a single event.
   // Must be registered BEFORE /api/events/:seq so Express doesn't consume "raw"
   // as the :seq parameter.

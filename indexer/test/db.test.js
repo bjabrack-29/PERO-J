@@ -217,6 +217,26 @@ describe("db.getEvent()", () => {
   });
 });
 
+describe("db.getEventByTxHash()", () => {
+  beforeEach(() => resetMock());
+
+  it("returns null when no event is indexed for the hash", async () => {
+    const result = await db.getEventByTxHash("missing");
+    assert.equal(result, null);
+  });
+
+  it("returns the newest event matching the transaction hash", async () => {
+    _nextRow = { seq: 7, tx_hash: "abc", ledger: 42 };
+    const result = await db.getEventByTxHash("abc");
+    assert.deepEqual(result, { seq: 7, tx_hash: "abc", ledger: 42 });
+
+    const { sql, params } = lastCall();
+    assert.ok(sql.includes("tx_hash = $1"), "expected tx_hash filter");
+    assert.ok(sql.includes("ORDER BY ledger DESC"), "expected newest event first");
+    assert.deepEqual(params, ["abc"]);
+  });
+});
+
 describe("db.getEvents()", () => {
   beforeEach(() => resetMock());
 
